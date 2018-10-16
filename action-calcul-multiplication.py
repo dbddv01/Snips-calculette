@@ -6,6 +6,11 @@ from hermes_python.hermes import Hermes
 from hermes_python.ontology import *
 import io
 import math
+# Fixing utf-8 issues when sending Snips intents in French with accents
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 
 CONFIGURATION_ENCODING_FORMAT = "utf-8"
 CONFIG_INI = "config.ini"
@@ -35,7 +40,6 @@ def action_wrapper(hermes, intentMessage, conf):
     - intentMessage : an object that represents the recognized intent
     - hermes : an object with methods to communicate with the MQTT bus following the hermes protocol. 
     - conf : a dictionary that holds the skills parameters you defined 
-
     Refer to the documentation for further details. 
     """ 
     first = int(intentMessage.slots.firstTerm.first().value)
